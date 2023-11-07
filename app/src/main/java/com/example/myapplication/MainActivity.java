@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListView categoriesListView;
-    private ArrayList<String> categoriesList;
+    private ListView categoriesListView; // ListView для отображения списка категорий
+    private ArrayList<String> categoriesList; //Список категорий
     private ArrayAdapter<String> categoriesAdapter;
 
     @Override
@@ -24,14 +24,20 @@ public class MainActivity extends AppCompatActivity {
         categoriesListView = findViewById(R.id.categories_listview);
 
         categoriesList = new ArrayList<>();
-        categoriesList.add("Спорт");
-        categoriesList.add("Работа");
-        categoriesList.add("Дом");
-        // Добавьте остальные категории
+        categoriesList.add("Спорт"); //добавлени списка категории Спорт
+        categoriesList.add("Работа"); //добавление списка категории Работа
+        categoriesList.add("Дом"); //Добавление списка категории Дом
 
-        categoriesAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, categoriesList);
+        categoriesAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, categoriesList);//адамптер для списка категориий
         categoriesListView.setAdapter(categoriesAdapter);
 
-
-        };
+        categoriesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, TasksActivity.class);
+                intent.putExtra("category", categoriesList.get(position)); //передача выбранной категории в акстивити с задачами
+                startActivity(intent);
+            }
+        });
     }
+}
