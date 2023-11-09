@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -36,8 +35,19 @@ public class TasksActivity extends AppCompatActivity {
 
         tasksAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, tasksList);
         tasksListView.setAdapter(tasksAdapter);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String task = taskEditText.getText().toString().trim();
+                if (!task.isEmpty()) {
+                    tasksList.add(task);
+                    tasksAdapter.notifyDataSetChanged();
+                    taskEditText.setText("");
+                } else {
+
+                }
+            }
 
 
-
-        };
-    }
+        });
+    }}
